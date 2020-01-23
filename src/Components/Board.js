@@ -33,8 +33,7 @@ function Board(props) {
           neighbour: 0,
           isRevealed: false,
           isEmpty: false,
-          isFlagged: false,
-          displayItem: null
+          isFlagged: false
         };
       }
     }
@@ -56,19 +55,19 @@ function Board(props) {
     //Getting Mine numbers for cell to display
     if (boardData !== null) {
       const data = getMineNumber(boardData, height, width);
+      console.log("I want his", data);
       props.createBoard(data);
     }
   }, [boardData, height, width, createBoard]);
 
   //Handle left click for the cell
   function handleCellClick(x, y) {
-    console.log("clicked");
     //Take out a copy of data
     let updatedData = props.boardData;
-    //Preventing click on cell if cell is flagged
-    // if (updatedData[x][y].isFlagged) {
-    //   return false;
-    // }
+    // Preventing click on cell if cell is flagged
+    if (updatedData[x][y].isFlagged) {
+      return false;
+    }
 
     //Check if Mine and gameOver
     if (updatedData[x][y].isMine) {
