@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { ReactComponent as Mine } from "./imageFiles/bomb.svg";
+import { ReactComponent as Flag } from "./imageFiles/flag.svg";
 
 export default function Cell(props) {
   const [val, setVal] = useState(null);
@@ -18,7 +20,6 @@ export default function Cell(props) {
     if (!value.isRevealed && !value.isFlagged) {
       setVal(null);
     }
-    
   }, [props]);
 
   function assignClassName() {
@@ -32,7 +33,7 @@ export default function Cell(props) {
 
   return (
     <div className={assignClassName()} onClick={props.onClick} onContextMenu={props.onContextMenu}>
-      {val}
+      {val === "B" ? <Mine /> : val === "F" ? <Flag /> : val}
     </div>
   );
 }

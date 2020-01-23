@@ -1,0 +1,29 @@
+.cell {
+  border: 1px solid rgb(0, 0, 0);
+  line-height: 35px;
+  height: 35px;
+  text-align: center;
+  width: 35px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: green;
+  background: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:focus {
+    outline: none;
+  }
+}
+
+.is-mine {
+  background: white;
+  // color: white;
+}
+.is-flag {
+  color: red;
+}
+.hidden {
+  background: #80d5ff;
+}
