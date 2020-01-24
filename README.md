@@ -1,4 +1,6 @@
-This is the MineSweeper Game.
+This is the MineSweeper Game. <br>
+
+Tech Stack: React (Create-react-app), Redux (state management), jest (testing)
 
 ## Available Scripts
 
