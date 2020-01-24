@@ -3,44 +3,36 @@ export const getRandomNumber = area => {
   return Math.floor(Math.random() * 1000 + 1) % area;
 };
 
-const traverseBoard = (x, y, data, height, width) => {
+const scanBoard = (x, y, data, height, width) => {
   const el = [];
-
   //up
   if (x > 0) {
     el.push(data[x - 1][y]);
   }
-
   //down
   if (x < height - 1) {
     el.push(data[x + 1][y]);
   }
-
   //left
   if (y > 0) {
     el.push(data[x][y - 1]);
   }
-
   //right
   if (y < width - 1) {
     el.push(data[x][y + 1]);
   }
-
   // top left
   if (x > 0 && y > 0) {
     el.push(data[x - 1][y - 1]);
   }
-
   // top right
   if (x > 0 && y < width - 1) {
     el.push(data[x - 1][y + 1]);
   }
-
   // bottom right
   if (x < height - 1 && y < width - 1) {
     el.push(data[x + 1][y + 1]);
   }
-
   // bottom left
   if (x < height - 1 && y > 0) {
     el.push(data[x + 1][y - 1]);
@@ -55,7 +47,7 @@ export const getMineNumber = (data, height, width) => {
       //Get the mines away
       if (data[i][j].isMine !== true) {
         let mine = 0;
-        const boardArea = traverseBoard(data[i][j].x, data[i][j].y, data, height, width);
+        const boardArea = scanBoard(data[i][j].x, data[i][j].y, data, height, width);
         boardArea.forEach(value => {
           if (value.isMine === true) {
             mine++;
@@ -71,7 +63,7 @@ export const getMineNumber = (data, height, width) => {
   return updatedData;
 };
 
-export const revealBoard = data => {
+export const showBoard = data => {
   let updatedData = data;
   updatedData.map(datarow => {
     return datarow.map(dataitem => {
@@ -95,11 +87,12 @@ export const getUnrevealedData = data => {
 };
 
 export const getEmptyCells = (x, y, data, height, width) => {
-  const boardArea = traverseBoard(x, y, data, height, width);
+  const boardArea = scanBoard(x, y, data, height, width);
   boardArea.map(cell => {
     if (!cell.isFlagged && !cell.isRevealed && (cell.isEmpty || !cell.isMine)) {
       data[cell.x][cell.y].isRevealed = true;
       if (cell.isEmpty) {
+        //Recursion Concept
         getEmptyCells(cell.x, cell.y, data, height, width);
       }
     }

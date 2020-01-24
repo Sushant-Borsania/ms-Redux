@@ -12,6 +12,9 @@ function Game(props) {
         width={props.gameData.width}
         mines={props.gameData.mines}
       />
+      <button className="resetBtn">
+        <a href="/">Reset</a>
+      </button>
     </div>
   );
 }
@@ -23,4 +26,5 @@ const mapStateToProps = state => {
     mineCount: state.boardReducers.mineCount
   };
 };
+
 export default connect(mapStateToProps)(Game);

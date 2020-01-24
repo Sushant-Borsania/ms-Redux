@@ -20,6 +20,11 @@
     "test": "jest",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ]
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -34,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-test-renderer": "^16.12.0"
   }
 }

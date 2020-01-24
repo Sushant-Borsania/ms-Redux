@@ -4,11 +4,10 @@ import "../src/index.scss";
 import Game from "./Game";
 
 //Redux Stuff
-import { createStore, applyMiddleware } from "redux";
+import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./Store/reducers";
-import thunk from "redux-thunk";
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <Provider store={store}>

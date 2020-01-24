@@ -9,3 +9,7 @@ export const statusChange = details => {
 export const mineUpdater = details => {
   return { type: "MINE_UPDATER", details };
 };
+
+export const resetGame = details => {
+  return {type: "RESET_BOARD"}
+}

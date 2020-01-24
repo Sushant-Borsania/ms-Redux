@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import {
   getRandomNumber,
   getMineNumber,
-  revealBoard,
+  showBoard,
   getUnrevealedData,
   getEmptyCells
 } from "./Helpers";
@@ -12,9 +12,7 @@ import { createBoard, statusChange, mineUpdater } from "../Store/actions";
 import Cell from "./Cell";
 
 function Board(props) {
-  console.log("BOARD PROPS", props);
   const [count, setCount] = useState(0);
-
   //Destructing to pass as dependency
   const { height, width, mines, createBoard, boardData } = props;
   //Getting board ready with mines and mine number surrounding the cell
@@ -55,7 +53,6 @@ function Board(props) {
     //Getting Mine numbers for cell to display
     if (boardData !== null) {
       const data = getMineNumber(boardData, height, width);
-      console.log("I want his", data);
       props.createBoard(data);
     }
   }, [boardData, height, width, createBoard]);
@@ -71,7 +68,7 @@ function Board(props) {
 
     //Check if Mine and gameOver
     if (updatedData[x][y].isMine) {
-      updatedData = revealBoard(updatedData);
+      updatedData = showBoard(updatedData);
       props.createBoard(updatedData);
       props.statusChange("Game Over");
     }
@@ -85,7 +82,7 @@ function Board(props) {
     }
 
     if (getUnrevealedData(updatedData).length === props.mineCount) {
-      revealBoard(updatedData);
+      showBoard(updatedData);
       props.statusChange("You win");
       props.createBoard(updatedData);
     }
@@ -101,7 +98,6 @@ function Board(props) {
     if (updatedData[x][y].isRevealed) {
       return true;
     }
-
     if (!updatedData[x][y].isRevealed && !updatedData[x][y].isFlagged) {
       updatedData[x][y].isFlagged = true;
       props.mineUpdater(props.mineCount - 1);
@@ -137,7 +133,7 @@ function Board(props) {
       //Compare two arrays
       if (JSON.stringify(mineCells) === JSON.stringify(flagCells)) {
         props.statusChange("You win");
-        updatedData = revealBoard(updatedData);
+        updatedData = showBoard(updatedData);
         props.createBoard(updatedData);
       }
     }

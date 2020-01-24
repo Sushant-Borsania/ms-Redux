@@ -7,11 +7,10 @@ export default function Cell(props) {
 
   useEffect(() => {
     const { value } = props;
-    //Display value accordingly!
     if (value.isRevealed && value.isMine) {
       setVal("B");
     }
-    if (value.isRevealed && !value.isMine) {
+    if (value.isRevealed && !value.isMine && value.neighbour !== 0) {
       setVal(value.neighbour);
     }
     if (!value.isRevealed && value.isFlagged) {
